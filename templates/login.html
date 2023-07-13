@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../static/styles.css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="692921091599-bveh9c74s4l517dvmrb6b9ik9rcvq44q.apps.googleusercontent.com">
+</head>
+<body>
+  <div class="AccountLogIn w-full h-full relative bg-white">
+    <div class="Rectangle6 w-[702px] h-full left-0 top-0 absolute">
+      <img src="{{ url_for('static', filename='../static/images/login.png') }}"/>
+    </div>
+  </div>
+
+    <div class="Rectangle7 w-[702px] h-[307px] left-0 top-[717px] absolute bg-gradient-to-b from-transparent to-gray-700"></div>
+    <div class="Vivavents left-[271px] top-[968px] absolute text-white text-[33px] font-bold lowercase">VivaVents</div>
+    <div class="Vivavents left-[1150px] top-[238px] absolute text-red-500 text-[33px] font-bold lowercase">VivaVents</div>
+    <div class="WelcomeBack left-[923px] top-[280px] absolute text-indigo-950 text-[50px] font-bold">Welcome back !</div>
+
+      
+    <form action="" method="post">
+      <div class="Group1 w-[448px] h-[60px] left-[862px] top-[388px] absolute">
+        <div class="Rectangle8 w-[448px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
+        <div class="EmailAddress w-[100px] h-[25.26px] left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Email address</div>
+        <label class="MyJohnDoeMailGmailCom w-[227px] h-[25.26px] left-[9px] top-[28.42px] absolute text-indigo-950 text-opacity-95 text-[15px] font-normal">
+          <input class="w-full focus:outline-none focus:shadow-outline" type="email" name="email" id="email" placeholder="my_john_doe_mail@gmail.com" required >
+        </label>
+      </div>
+    
+    <div class="Group12 w-[448px] h-[60px] left-[862px] top-[458px] absolute">
+      <div class="Rectangle8 w-[448px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
+      <div class="Password left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Password</div>
+      <label class=" left-[9px] top-[25.42px] absolute text-indigo-950 text-opacity-95 text-[15px] font-normal tracking-widest">
+        <input class="w-full focus:outline-none focus:shadow-outline" type="password" name="password" id="password" required placeholder="************" >
+      </label>
+    </div>
+    <button class="Rectangle9 w-[448px] h-[50px] left-[862px] top-[538px] absolute bg-red-500 hover:bg-red-600 focus:outline-none rounded-full">
+      <p class=" text-2xl font-bold text-white ">Log In</p>
+    </button>
+    </form>
+    <div class="DontHaveAnAccount left-[910px] top-[800px] absolute text-gray-700 text-opacity-50 text-[16px] font-normal">Don't have an account?</div>
+    <div class="SignUp left-[1090px] top-[800px] absolute text-red-500 text-[16px] font-medium">Sign Up</div>
+
+    <button class="Rectangle13 w-[448px] h-[50px] left-[862px] top-[677px] absolute bg-white rounded-full border border border border border-gray-700 border-opacity-50">
+      <div class="LogInWithGoogle left-[175px] top-[10px] absolute text-center text-gray-700 text-[14px] font-medium" data-onsuccess="onSignIn">Log in with Google</div>
+      <img class="Image4 w-6 h-6 left-[150px] top-[10px] absolute" src="../static/images/24x24.png" />
+    </button>
+    <div class="LogIn left-[1057px] top-[551px] absolute text-white text-[20px] font-bold"></div>
+    <div class="Group2 left-[992px] top-[690px] absolute">
+      
+      
+    </div>
+    <div class="Rectangle10 w-[62px] h-[25px] left-[1055px] top-[620px] absolute bg-white rounded-[46px] border border border border border-gray-700 border-opacity-50"></div>
+    <div class="Rectangle11 w-[193px] h-[1px] left-[1117px] top-[632px] absolute bg-gray-700 bg-opacity-50"></div>
+    <div class="Or left-[1076px] top-[622px] absolute text-gray-700 text-opacity-50 text-[14px] font-bold">or</div>
+    <div class="Rectangle12 w-[193px] h-[1px] left-[862px] top-[632px] absolute bg-gray-700 bg-opacity-50"></div>
+    <div class="ForgotPasswordReset left-[992px] top-[767px] absolute">
+      <span style="text-gray-700 text-base font-medium">Forgot password? </span>
+      <span style="text-red-500 text-[16px] font-medium">Reset</span>
+    </div>
+  </div>
+  <script>
+    function signIn() {
+      var button = document.getElementsByClassName("LogInWithGoogle");
+      var auth2 = google.accounts.auth.getAuthInstance();
+      auth2.signIn(button);
+    }
+    <!-- function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    } -->
+    
+    </script>
+    
+</body>
+</html>

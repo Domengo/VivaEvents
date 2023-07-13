@@ -1,0 +1,218 @@
+.account-login, .account-login * {
+  box-sizing: border-box;
+  }
+  .account-login {
+  background: #ffffff;
+  width: 1440px;
+  height: 1024px;
+  position: relative;
+  overflow: hidden;
+  }
+  .rectangle-6 {
+  width: 702px;
+  height: 1024px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  }
+  .rectangle-7 {
+  background: linear-gradient(180deg, rgba(57, 54, 79, 0.00) 0%,rgba(57, 54, 79, 1.00) 100%);
+  width: 702px;
+  height: 307px;
+  position: absolute;
+  left: 0px;
+  top: 717px;
+  }
+  .viva-vents {
+  color: #ffffff;
+  text-align: left;
+  font: 700 33px 'Gelasio', sans-serif;
+  text-transform: lowercase;
+  position: absolute;
+  left: 271px;
+  top: 968px;
+  }
+  .viva-vents2 {
+  color: #ef5435;
+  text-align: left;
+  font: 700 33px 'Gelasio', sans-serif;
+  text-transform: lowercase;
+  position: absolute;
+  left: 1150px;
+  top: 238px;
+  }
+  .welcome-back {
+  color: #1e0a3c;
+  text-align: left;
+  font: 700 50px 'Inter', sans-serif;
+  position: absolute;
+  left: 923px;
+  top: 280px;
+  }
+  .group-1 {
+  position: absolute;
+  inset: 0;
+  }
+  .rectangle-8 {
+  background: #ffffff;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(57, 54, 79, 0.16);
+  border-width: 2px;
+  width: 448px;
+  height: 60px;
+  position: absolute;
+  left: 862px;
+  top: 388px;
+  }
+  .email-address {
+  color: rgba(57, 54, 79, 0.48);
+  text-align: left;
+  font: 400 17px 'Source Sans 3', sans-serif;
+  position: absolute;
+  left: 871px;
+  top: 393.26px;
+  width: 100px;
+  height: 25.26px;
+  }
+  .my-john-doe-mail-gmail-com {
+  color: rgba(30, 10, 60, 0.96);
+  text-align: left;
+  font: 400 17px 'Source Sans 3', sans-serif;
+  position: absolute;
+  left: 871px;
+  top: 416.42px;
+  width: 227px;
+  height: 25.26px;
+  }
+  .group-12 {
+  position: absolute;
+  inset: 0;
+  }
+  .rectangle-82 {
+  background: #ffffff;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(57, 54, 79, 0.16);
+  border-width: 2px;
+  width: 448px;
+  height: 60px;
+  position: absolute;
+  left: 862px;
+  top: 458px;
+  }
+  .password {
+  color: rgba(57, 54, 79, 0.48);
+  text-align: left;
+  font: 400 17px 'Source Sans 3', sans-serif;
+  position: absolute;
+  left: 871px;
+  top: 463.26px;
+  }
+  . {
+  color: rgba(30, 10, 60, 0.96);
+  text-align: left;
+  font: 400 20px 'Source Sans 3', sans-serif;
+  position: absolute;
+  left: 871px;
+  top: 483.42px;
+  }
+  .rectangle-9 {
+  background: #ef5435;
+  border-radius: 5px;
+  width: 448px;
+  height: 50px;
+  position: absolute;
+  left: 862px;
+  top: 538px;
+  }
+  .rectangle-13 {
+  background: #ffffff;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(57, 54, 79, 0.48);
+  border-width: 1px;
+  width: 448px;
+  height: 50px;
+  position: absolute;
+  left: 862px;
+  top: 677px;
+  }
+  .log-in {
+  color: #ffffff;
+  text-align: left;
+  font: 700 20px 'Inter', sans-serif;
+  position: absolute;
+  left: 1057px;
+  top: 551px;
+  }
+  .group-2 {
+  position: absolute;
+  inset: 0;
+  }
+  .log-in-with-google {
+  color: #39364f;
+  text-align: left;
+  font: 500 16px 'Inter', sans-serif;
+  position: absolute;
+  left: 1037px;
+  top: 693px;
+  }
+  .image-4 {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 992px;
+  top: 690px;
+  }
+  .rectangle-10 {
+  background: #ffffff;
+  border-radius: 46px;
+  border-style: solid;
+  border-color: rgba(57, 54, 79, 0.48);
+  border-width: 1px;
+  width: 62px;
+  height: 25px;
+  position: absolute;
+  left: 1055px;
+  top: 620px;
+  }
+  .rectangle-11 {
+  background: rgba(57, 54, 79, 0.48);
+  width: 193px;
+  height: 1px;
+  position: absolute;
+  left: 1117px;
+  top: 632px;
+  }
+  .or {
+  color: rgba(57, 54, 79, 0.48);
+  text-align: left;
+  font: 700 16px 'Inter', sans-serif;
+  position: absolute;
+  left: 1076px;
+  top: 622px;
+  }
+  .rectangle-12 {
+  background: rgba(57, 54, 79, 0.48);
+  width: 193px;
+  height: 1px;
+  position: absolute;
+  left: 862px;
+  top: 632px;
+  }
+  .forgot-password-reset {
+  text-align: left;
+  font: 500 16px 'Inter', sans-serif;
+  position: absolute;
+  left: 992px;
+  top: 767px;
+  }
+  .forgot-password-reset-span {
+  color: #39364f;
+  font: 500 16px 'Inter', sans-serif;
+  }
+  .forgot-password-reset-span2 {
+  color: #ef5435;
+  font: 500 16px 'Inter', sans-serif;
+  }
