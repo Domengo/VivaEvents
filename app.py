@@ -1,67 +1,77 @@
-from flask import Flask, render_template, request, redirect, session
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, jsonify, make_response, redirect, render_template
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from flask_httpauth import HTTPBasicAuth
+from models.base_models import Base, User
+import bcrypt
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+auth = HTTPBasicAuth()
 
-db = SQLAlchemy(app)
-
-
-class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    password_hash = db.Column(db.String(100), nullable=False)
+# Database configuration
+engine = create_engine('mysql+mysqldb://eventU:pwd@host/event_db')
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    # Get user data from the form
+    name = request.form.get('name')
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
 
-        # Create a new User instance
-        user = User(username=username, password_hash=password)
+    # Hash the password
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-        # Add the user to the session and commit to the database
-        db.session.add(user)
-        db.session.commit()
+    # Create a new user
+    new_user = User(name=name, username=username, email=email, password=hashed_password)
 
-        return redirect('/login')
+    # Store the user in the database
+    session = DBSession()
+    session.add(new_user)
+    session.commit()
 
-    return render_template('signup.html')
+    return redirect('/login?message=success')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login')
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        # Verify user credentials
-        user = User.query.filter_by(username=username, password_hash=password).first()
-
-        if user:
-            session['user_id'] = user.id
-            return redirect('/dashboard')
-
-        return redirect('/login')
-
-    return render_template('login.html')
+    message = request.args.get('message')
+    return render_template('login.html', message=message)
 
 
-@app.route('/dashboard')
-def dashboard():
-    # Retrieve user information from session
-    user_id = session.get('user_id')
-    if user_id:
-        user = User.query.get(user_id)
-        return f"Welcome, {user.username}!"
-    else:
-        return redirect('/login')
+@auth.verify_password
+def verify_password(email_or_username, password):
+    # Find the user by email or username
+    session = DBSession()
+    user = session.query(User).filter_by(email=email_or_username).first()
+
+    if not user:
+        # If user is not found by email, try finding by username
+        user = session.query(User).filter_by(username=email_or_username).first()
+
+    if not user or not bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+        return False
+
+    return True
+
+
+@app.route('/protected')
+def protected():
+    # Get the token from the cookie
+    token = request.cookies.get('token')
+
+    # Verify the token and retrieve the user
+    email_or_username = auth.verify_password(token, '')
+
+    if not email_or_username:
+        return jsonify({'message': 'Authentication failed.'}), 401
+
+    # Authentication successful
+    return jsonify({'message': 'Protected resource.'})
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
