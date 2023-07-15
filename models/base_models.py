@@ -22,8 +22,7 @@ class Db:
         event_env = os.getenv('env')
 
         self.engine = create_engine(
-            f'mysql+mysqldb://{event_user}:\
-                {event_pwd}@{event_host}/{event_db}',
+            f'mysql+mysqldb://{event_user}:{event_pwd}@{event_host}/{event_db}',
             echo=True
         )
 
@@ -47,18 +46,20 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     email = Column(String(50), unique=True)
-    password = Column(String(50))
+    password = Column(String(100))
     username = Column(String(50))
     phone = Column(String(50))
-    name = Column(String(50))
+    fullname = Column(String(50))
 
-    def __init__(self, email, name, phone):
+    def __init__(self, email, password, username, phone, fullname):
         self.email = email
-        self.name = name
+        self.fullname = fullname
         self.phone = phone
+        self.username = username
+        self.password = password
 
     def __repr__(self):
-        return f'<User {self.name}> email {self.email} phone {self.phone}'
+        return f'<User {self.fullname}> email {self.email} phone {self.phone}'
 
 
 # Instantiate Db class to create tables

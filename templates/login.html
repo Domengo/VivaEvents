@@ -19,8 +19,11 @@
     <div class="Vivavents left-[271px] top-[968px] absolute text-white text-[33px] font-bold lowercase">VivaVents</div>
     <div class="Vivavents left-[1150px] top-[238px] absolute text-red-500 text-[33px] font-bold lowercase">VivaVents</div>
     <div class="WelcomeBack left-[923px] top-[280px] absolute text-indigo-950 text-[50px] font-bold">Welcome back !</div>
-
-      
+    <div class="signup left-[923px] top-[300px] absolute text-indigo-950 text-[20px] font-bold">
+      {% if message == 'success' %}
+        <p>Successfully signed up! You can now login.</p>
+    {% endif %}
+    </div>
     <form action="" method="post">
       <div class="Group1 w-[448px] h-[60px] left-[862px] top-[388px] absolute">
         <div class="Rectangle8 w-[448px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>

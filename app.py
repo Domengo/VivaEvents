@@ -3,30 +3,46 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from flask_httpauth import HTTPBasicAuth
 from models.base_models import Base, User
+import os, dotenv
 import bcrypt
+
+dotenv.load_dotenv()
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 # Database configuration
-engine = create_engine('mysql+mysqldb://eventU:pwd@host/event_db')
+event_user = os.getenv('eventU')
+event_pwd = os.getenv('pwd')
+event_host = os.getenv('host')
+event_db = os.getenv('db')
+
+engine = create_engine(f'mysql+mysqldb://{event_user}:{event_pwd}@{event_host}/{event_db}',echo=True)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    # Get user data from the form
-    name = request.form.get('name')
+    """ Get user data from the form
+    """
+    fullname = request.form.get('fullname')
     username = request.form.get('username')
     email = request.form.get('email')
     password = request.form.get('password')
+    phone = request.form.get('phone')
+    confirm_password = request.form.get('confirm_password')
+
+
+    if password != confirm_password:
+        message = 'Passwords do not match.'
+        return render_template('signup.html', message=message)
 
     # Hash the password
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
     # Create a new user
-    new_user = User(name=name, username=username, email=email, password=hashed_password)
+    new_user = User(email=email, password=hashed_password, username=username, phone=phone, fullname=fullname)
 
     # Store the user in the database
     session = DBSession()
