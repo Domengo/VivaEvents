@@ -61,3 +61,33 @@ def login():
 
 # ... (Other routes and functions) ...
 
+@auth.verify_password
+def verify_password(email_or_username, password):
+    """
+    Find the user by email or username and verify the password
+    """
+    session = DBSession()
+    user = session.query(User).filter((User.email == email_or_username) | (User.username == email_or_username)).first()
+    session.close()
+
+    if not user or not bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+        return False
+    return True
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = Login(request.form)
+    if request.method == 'POST' and form.validate():
+        email = form.email.data
+        username = form.username.data
+        password = form.password.data
+        
+        email_or_username = email or username
+
+        if verify_password(email_or_username, password):
+            flash('Login successful!')
+            return redirect('/landing_page?message=success')
+        else:
+            flash('Invalid email/username or password')
+            return render_template('login.html', form=form)
+    return render_template('login.html', form=form)
