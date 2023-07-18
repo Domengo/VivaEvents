@@ -13,3 +13,51 @@ def solution(A):
 
 A = [-1, -3]
 print(solution(A))
+
+from flask import Flask, request, flash, redirect, render_template, url_for
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from flask_httpauth import HTTPBasicAuth
+from models.base_models import Base, User
+import os, dotenv
+import bcrypt
+from form.registration import Registration
+
+dotenv.load_dotenv()
+
+app = Flask(__name__)
+auth = HTTPBasicAuth()
+SECRET_KEY = os.getenv('SECRET_KEY') or 'hard to guess string'
+app.config['SECRET_KEY']
+
+
+# Database configuration
+# ... (Your database configuration code here) ...
+
+# ... (Your signup route here) ...
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        # Retrieve the user from the database based on the provided email
+        session = DBSession()
+        user = session.query(User).filter_by(email=email).first()
+        session.close()
+
+        # Check if the user exists and the password is correct
+        if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+            # You can use a session or token-based authentication to keep the user logged in
+            # For simplicity, here we'll just use a flash message to indicate successful login
+            flash('Login successful!')
+            return redirect('/dashboard')  # Redirect to the dashboard page after successful login
+
+        # If the user doesn't exist or the password is incorrect, show an error message
+        flash('Invalid email or password. Please try again.')
+
+    return render_template('login.html')  # Render the login page template
+
+# ... (Other routes and functions) ...
+

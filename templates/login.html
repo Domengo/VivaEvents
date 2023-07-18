@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="../static/styles.css">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="692921091599-bveh9c74s4l517dvmrb6b9ik9rcvq44q.apps.googleusercontent.com">
 </head>
@@ -27,8 +28,8 @@
     <form action="" method="post">
       <div class="Group1 w-[448px] h-[60px] left-[862px] top-[388px] absolute">
         <div class="Rectangle8 w-[448px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
-        <div class="EmailAddress w-[100px] h-[25.26px] left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Email address</div>
-        <label class="MyJohnDoeMailGmailCom w-[227px] h-[25.26px] left-[9px] top-[28.42px] absolute text-indigo-950 text-opacity-95 text-[15px] font-normal">
+        <div class="EmailAddress w-[120px] h-[25.26px] left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Email address or Username</div>
+        <label class="MyJohnDoeMailGmailCom w-[280px] h-[25.26px] left-[9px] top-[28.42px] absolute text-indigo-950 text-opacity-95 text-[15px] font-normal">
           <input class="w-full focus:outline-none focus:shadow-outline" type="email" name="email" id="email" placeholder="my_john_doe_mail@gmail.com" required >
         </label>
       </div>
@@ -45,7 +46,9 @@
     </button>
     </form>
     <div class="DontHaveAnAccount left-[910px] top-[800px] absolute text-gray-700 text-opacity-50 text-[16px] font-normal">Don't have an account?</div>
-    <div class="SignUp left-[1090px] top-[800px] absolute text-red-500 text-[16px] font-medium">Sign Up</div>
+    <div class="SignUp left-[1090px] top-[800px] absolute text-red-500 text-[16px] font-medium">
+      <a class="text-red-500 text-base font-medium" href="{{ url_for('static', filename='../signup') }}">Sign Up</a>
+    </div>
 
     <button class="Rectangle13 w-[448px] h-[50px] left-[862px] top-[677px] absolute bg-white rounded-full border border border border border-gray-700 border-opacity-50">
       <div class="LogInWithGoogle left-[175px] top-[10px] absolute text-center text-gray-700 text-[14px] font-medium" data-onsuccess="onSignIn">Log in with Google</div>
@@ -65,21 +68,5 @@
       <span style="text-red-500 text-[16px] font-medium">Reset</span>
     </div>
   </div>
-  <script>
-    function signIn() {
-      var button = document.getElementsByClassName("LogInWithGoogle");
-      var auth2 = google.accounts.auth.getAuthInstance();
-      auth2.signIn(button);
-    }
-    <!-- function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    } -->
-    
-    </script>
-    
 </body>
 </html>

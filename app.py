@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response, redirect, render_template
+from flask import Flask, request, jsonify, make_response, redirect, render_template, url_for
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from flask_httpauth import HTTPBasicAuth
@@ -21,12 +21,16 @@ engine = create_engine(f'mysql+mysqldb://{event_user}:{event_pwd}@{event_host}/{
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 
+# @app.route("/sign")
+# def sign():
+#     return render_template("signup.html")                                                                                           
+
 
 @app.route('/signup', methods=['POST'])
 def signup():
     """ Get user data from the form
     """
-    fullname = request.form.get('fullname')
+    fullname = request.form['fullname']
     username = request.form.get('username')
     email = request.form.get('email')
     password = request.form.get('password')
@@ -43,11 +47,14 @@ def signup():
 
     # Create a new user
     new_user = User(email=email, password=hashed_password, username=username, phone=phone, fullname=fullname)
+    # print(new_user)
+    # print("samson")
 
     # Store the user in the database
     session = DBSession()
     session.add(new_user)
     session.commit()
+    
 
     return redirect('/login?message=success')
 
