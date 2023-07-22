@@ -8,19 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-
+flask = "^2.0.1"  # Add any other dependencies you need
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[project]
-name = "event"
-dependencies = [
-"flask",
-]
-
-[build‐system]
-requires = ["setuptools"]
-build‐backend = "setuptools.build_meta"
-

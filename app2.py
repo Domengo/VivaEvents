@@ -7,6 +7,8 @@ import os, dotenv
 import bcrypt
 from form.registration import Registration
 from form.login import Login
+from flask_login import login_user
+
 
 dotenv.load_dotenv()
 
@@ -24,7 +26,7 @@ event_db = os.getenv('db')
 
 engine = create_engine(f'mysql+mysqldb://{event_user}:{event_pwd}@{event_host}/{event_db}',echo=True)
 Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)                                                                                      
+DBSession = sessionmaker(bind=engine)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -38,8 +40,8 @@ def signup():
         new_user = User(email=form.email.data, password=hashed_password, username=form.username.data, phone=form.phone.data, fullname=form.fullname.data)
 
         if form.password.data != form.confirm_password.data:
-            message = 'Passwords do not match.'
-            return render_template('signup.html', message=message)
+            flash('Passwords do not match.')
+            return render_template('signup.html')
 
         session = DBSession()
         session.add(new_user)
@@ -62,6 +64,7 @@ def verify_password(email_or_username, password):
         # If user is not found by email, try finding by username
         user = session.query(User).filter_by(username=email_or_username).first()
     session.close()
+
     if not user or not bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
         return False
     return True
@@ -70,23 +73,29 @@ def verify_password(email_or_username, password):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = Login(request.form)
+    form = Login()
     if request.method == 'POST' and form.validate():
         email = form.email.data
         username = form.username.data
         password = form.password.data
-        
-        email_or_username = [email, username]
 
-        verify_password((x for x in email_or_username), password)
+        # Determine which field was used (email or username)
+        email_or_username = email if email else username
 
-        if verify_password:
+        if verify_password(email_or_username, password):
+            session = DBSession()
+            user = session.query(User).filter_by(email=email_or_username).first() 
+            #bcrypt.checkpw(password.encode('utf-8'), user.hashed_password)
+            login_user(user)
             flash('Login successful!')
-            return redirect('/landing_page?message=success')
-        return render_template('login.html')
+            return redirect(url_for('landing_page'))
+        else:
+            flash('Invalid email/username or password')
+            return render_template('login.html')
     return render_template('login.html', form=form)
 
 
-app.route('/landing_page', methods=['GET'])
+@auth.login_required
+@app.route('/landing_page', methods=['GET'])
 def landing_page():
     return render_template('landing_page.html')

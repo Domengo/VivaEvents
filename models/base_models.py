@@ -5,7 +5,7 @@ import dotenv
 import os
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String, create_engine
-
+from flask_login import UserMixin
 dotenv.load_dotenv()
 
 Base = declarative_base()
@@ -33,7 +33,7 @@ class Db:
         Base.metadata.create_all(self.engine)
 
 
-class User(Base):
+class User(UserMixin, Base):
     """Table user which holds the user info
 
     Args:

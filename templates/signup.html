@@ -12,7 +12,15 @@
       <img src="{{ url_for('static', filename='../static/images/signup.png') }}"/>
     </div>
   </div>
-
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+        {% for message in messages %}
+          <li><em>{{ message }}</em></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
   <div class="Rectangle7 w-[702px] h-[307px] left-0 top-[717px] absolute bg-gradient-to-b from-transparent to-gray-700"></div>
   <div class="Vivavents left-[271px] top-[968px] absolute text-white text-[33px] font-bold lowercase">VivaVents</div>
   <div class="Vivavents left-[1150px] top-[172px] absolute text-red-500 text-[33px] font-bold lowercase">VivaVents</div>
@@ -26,57 +34,61 @@
             <input class="email  w-full focus:outline-none focus:shadow-outline" id="email" type="text" name="email" placeholder="my_john_doe_mail@gmail.com" required>
         </div>
     </div>
-    <div class="Group5 w-[220px] h-[60px] left-[862px] top-[315px] absolute">
+    <div class="Group5 w-[220px] h-[60px] left-0 top-[70px] absolute">
         <div class="Rectangle8 w-[220px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
         <label for="fullname" class="OfficialName block w-[94.92px] h-[25.26px] left-[8.54px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Full Name</label>
-        <div class="w-full h-[30px] bg-white px-1 bottom-0 absolute text-black text-[14px] font-normal">
+        <div class="w-full h-[30px] bg-white px-3 absolute bottom-[2px] text-black text-[14px] font-normal">
             <input class="fullname w-full focus:outline-none focus:shadow-outline" id="fullname" type="text" name="fullname" placeholder="John Doe" required>
         </div>
     </div>
-    <div class="Group8 w-[220px] h-[60px] left-[862px] top-[525px] absolute">
+    <div class="Group8 w-[220px] h-[60px] left-0 top-[210px] absolute">
         <div class="Rectangle8 w-[220px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
         <label for="password" class="Password w-[94.92px] h-[25.26px] left-[8.54px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Password</label>
         <div class="pass left-[8.54px] top-[28.42px] absolute text-indigo-950 text-opacity-95 text-[14px] font-normal">
             <input class="pass w-full focus:outline-none focus:shadow-outline" id="password" type="password" name="password" id="pass" required placeholder="password...">
         </div>
     </div>
-    <div class="Group6 w-[220px] h-[60px] left-[1090px] top-[315px] absolute">
+    <div class="Group6 w-[220px] h-[60px] left-[230px] top-[70px] absolute">
         <div class="Rectangle8 w-[220px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
         <label for="username" class="username left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Username</label>
-        <div class="w-full h-[30px] bg-white px-2 absolute bottom-0 text-black text-[14px] font-normal">
+        <div class="w-full h-[30px] bg-white px-2 absolute bottom-[2px] text-black text-[14px] font-normal">
             <input class="username w-full focus:outline-none focus:shadow-outline" id="username" type="text" name="username" placeholder="johndoe69" required>
         </div>
     </div>
-    <div class="Group9 w-[220px] h-[60px] left-[1090px] top-[526px] absolute">
+    <div class="Group9 w-[220px] h-[60px] left-[230px] top-[210px] absolute">
         <div class="Rectangle8 w-[220px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
         <label for="confirm_password" class="ConfirmPassword left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Confirm Password</label>
         <div class="confirm_password left-[9px] top-[28px] absolute text-indigo-950 text-opacity-95 text-[14px] font-normal">
             <input class="confirm_password w-full focus:outline-none focus:shadow-outline" type="password" name="confirm_password" id="confirm_password" required placeholder="password...">
         </div>
     </div>
-    <div class="Group7 w-[448px] h-[60px] left-[862px] top-[455px] absolute ">
+    <div class="Group7 w-[448px] h-[60px] left-0 top-[140px] absolute ">
         <div class="Rectangle8 w-[450px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
         <label for="phone" class="PhoneNumber left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">Phone Number</label>
         <div class="phone left-[79px] top-[29px] absolute text-indigo-950 text-opacity-95 text-[14px] font-normal">
             <input class="phone w-full focus:outline-none focus:shadow-outline" type="number" name="phone" id="phone" required placeholder="+254712345678">
         </div>
     </div>
-    <div class="Rectangle13 w-[448px] h-[50px] left-[862px] top-[744px] absolute bg-white rounded border border border border border-gray-700 border-opacity-50"></div>
-    <div class="Group10 w-[448px] h-[50px] left-[862px] top-[605px] absolute">
+    <div class="Group10 w-[448px] h-[50px] left-0 top-[320px] absolute">
         <button type="submit">
             <div class="Rectangle9 w-[448px] h-[50px] left-0 top-0 absolute hover:bg-red-700 bg-red-500 rounded-full"></div>
             <div class="CreateAccount left-[147px] top-[13px] absolute text-white text-[20px] font-bold">Create Account</div>
         </button>
     </div>
   </form>
-  <div class="HaveAnAccountLogIn left-[992px] top-[834px] absolute">
+  <button class="Rectangle13 w-[448px] h-[50px] left-0 top-[500px] absolute bg-white rounded-full border border border border border-gray-700 border-opacity-50">
+    <div class="LogInWithGoogle left-[175px] top-[10px] absolute text-center text-gray-700 text-[14px] font-medium" data-onsuccess="onSignIn">Log in with Google</div>
+    <img class="Image4 w-6 h-6 left-[150px] top-[10px] absolute" src="../static/images/24x24.png" />
+  </button>
+  
+  <div class="HaveAnAccountLogIn left-[150px] top-[570px] absolute">
     <span class="text-gray-700 text-base font-medium">Have an account? </span>
     <a class="text-red-500 text-base font-medium" href="{{ url_for('static', filename='../login') }}">Log In</a>
   </div>
-  <div class="Rectangle10 w-[62px] h-[25px] left-[1055px] top-[687px] absolute bg-white rounded-[46px] border border border border border-gray-700 border-opacity-50"></div>
-  <div class="Rectangle11 w-[193px] h-[1px] left-[1117px] top-[699px] absolute bg-gray-700 bg-opacity-50"></div>
-    <div class="Or left-[1076px] top-[689px] bottom-0.15 text-gray-700 text-opacity-50 text-[14px] font-bold">or</div>
-  <div class="Rectangle12 w-[193px] h-[1px] left-[862px] top-[699px] absolute bg-gray-700 bg-opacity-50"></div>
+  <div class="Rectangle10 w-[62px] h-[25px] left-[192px] top-[430px] absolute bg-white rounded-[46px] border border border border border-gray-700 border-opacity-50"></div>
+  <div class="Rectangle11 w-[193px] h-[1px] left-0 top-[442px] absolute bg-gray-700 bg-opacity-50"></div>
+    <div class="Or left-[213px] top-[430px] absolute text-gray-700 text-opacity-50 text-[14px] font-bold">or</div>
+  <div class="Rectangle12 w-[193px] h-[1px] left-[253px] top-[442px] absolute bg-gray-700 bg-opacity-50"></div>
 </div>
 </body>
 </html>

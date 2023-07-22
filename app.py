@@ -21,10 +21,6 @@ engine = create_engine(f'mysql+mysqldb://{event_user}:{event_pwd}@{event_host}/{
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 
-# @app.route("/sign")
-# def sign():
-#     return render_template("signup.html")                                                                                           
-
 
 @app.route('/signup', methods=['POST'])
 def signup():

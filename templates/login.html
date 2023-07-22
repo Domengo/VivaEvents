@@ -21,9 +21,16 @@
     <div class="Vivavents left-[1150px] top-[238px] absolute text-red-500 text-[33px] font-bold lowercase">VivaVents</div>
     <div class="WelcomeBack left-[923px] top-[280px] absolute text-indigo-950 text-[50px] font-bold">Welcome back !</div>
     <div class="signup left-[923px] top-[300px] absolute text-indigo-950 text-[20px] font-bold">
-      {% if message == 'success' %}
-        <p>Successfully signed up! You can now login.</p>
-    {% endif %}
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+            {% for message in messages %}
+              <li><em>{{ message }}</em></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
     </div>
     <form action="" method="post">
       <div class="Group1 w-[448px] h-[60px] left-[862px] top-[388px] absolute">
@@ -41,7 +48,7 @@
         <input class="w-full focus:outline-none focus:shadow-outline" type="password" name="password" id="password" required placeholder="************" >
       </label>
     </div>
-    <button class="Rectangle9 w-[448px] h-[50px] left-[862px] top-[538px] absolute bg-red-500 hover:bg-red-600 focus:outline-none rounded-full">
+    <button class="Rectangle9 w-[448px] h-[50px] left-[862px] top-[538px] absolute bg-red-500 hover:bg-red-600 focus:outline-none rounded-full" type="submit">
       <p class=" text-2xl font-bold text-white ">Log In</p>
     </button>
     </form>

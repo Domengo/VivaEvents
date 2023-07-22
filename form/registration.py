@@ -27,4 +27,3 @@ class Registration(Form):
 
 # u = user(request.form)
 
-
