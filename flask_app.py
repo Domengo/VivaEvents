@@ -62,7 +62,7 @@ def signup():
 
         flash('Thanks for registering')
         return redirect('/login?message=success')
-    return render_template('signup2.html', form=form)
+    return render_template('signup.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -84,7 +84,7 @@ def login():
         else:
             flash('Invalid email/username or password')
 
-    return render_template('login2.html', form=form)
+    return render_template('login.html', form=form)
 
 @app.route('/logout')
 @login_required
@@ -103,6 +103,9 @@ def verify_password(email, password):
         return False
     return True
 
+@app.route('/landing_page', methods=['GET'])
+def landing_page():
+    return render_template('landing_page.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
