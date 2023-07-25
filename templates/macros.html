@@ -1,0 +1,16 @@
+{% macro render_field(field, top_position) %}
+<div class="Group1 w-[448px] h-[60px] left-[862px] top-{{top_position}} absolute">
+    <div class="Rectangle8 w-[448px] h-[60px] left-0 top-0 absolute bg-white rounded border border border border border-gray-700 border-opacity-20"></div>
+    <div class="EmailAddress w-[120px] h-[25.26px] left-[9px] top-[5.26px] absolute text-gray-700 text-opacity-50 text-[13px] font-normal">{{ field.label }}</div>
+    <div class="MyJohnDoeMailGmailCom w-[280px] h-[25.26px] left-[9px] top-[28.42px] absolute text-indigo-950 text-opacity-95 text-[15px] font-normal">
+        {{ field(class="w-full focus:outline-none focus:shadow-outline") }}
+    </div>
+    {% if field.errors %}
+        <ul class="errors">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endmacro %}
